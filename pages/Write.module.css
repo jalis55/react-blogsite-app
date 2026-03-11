@@ -1,0 +1,368 @@
+.page {
+  padding-top: 64px;
+  min-height: 100vh;
+}
+
+.locked {
+  padding-top: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.lockedInner {
+  text-align: center;
+  max-width: 400px;
+  padding: 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.lockIcon {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.lockedInner h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.lockedInner p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.signInBtn {
+  background: var(--accent);
+  color: #0d0d0d;
+  font-weight: 700;
+  padding: 12px 32px;
+  border-radius: 32px;
+  font-size: 0.95rem;
+  transition: all var(--transition);
+}
+
+.signInBtn:hover {
+  background: var(--accent-light);
+}
+
+/* Toolbar */
+.toolbar {
+  position: sticky;
+  top: 64px;
+  z-index: 50;
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.toolbarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toolbarIcon {
+  color: var(--accent);
+}
+
+.toolbarTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.toolbarActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbarBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: 7px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+}
+
+.toolbarBtn:hover, .toolbarBtn.active {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.draftBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 7px 14px;
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+}
+
+.draftBtn:hover:not(:disabled) {
+  color: var(--text-primary);
+}
+
+.publishBtn {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0d0d0d;
+  background: var(--accent);
+  padding: 7px 20px;
+  border-radius: 20px;
+  transition: all var(--transition);
+}
+
+.publishBtn:hover:not(:disabled) {
+  background: var(--accent-light);
+}
+
+.publishBtn:disabled, .draftBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form */
+.formWrap {
+  padding-top: 32px;
+  padding-bottom: 80px;
+}
+
+.error {
+  background: rgba(224, 85, 85, 0.1);
+  border: 1px solid rgba(224, 85, 85, 0.3);
+  color: var(--danger);
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.editor {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+}
+
+.mainEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.input {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  transition: border-color var(--transition);
+  width: 100%;
+  outline: none;
+  font-family: var(--font-body);
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+.titleInput {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 8px 0;
+  font-size: 1.8rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-primary);
+  width: 100%;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.titleInput:focus {
+  border-bottom-color: var(--accent);
+}
+
+.titleInput::placeholder {
+  color: var(--text-muted);
+}
+
+.contentArea {
+  min-height: 400px;
+  resize: vertical;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Side settings */
+.sideSettings {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settingCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settingTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.imagePreview {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-top: 4px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.authorAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.authorName {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Preview */
+.previewWrap {
+  max-width: 780px;
+  padding: 0 0 80px;
+}
+
+.previewTitle {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 24px;
+  line-height: 1.15;
+}
+
+.previewCover {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+}
+
+.previewExcerpt {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  font-style: italic;
+  border-left: 3px solid var(--accent);
+  padding-left: 16px;
+}
+
+@media (max-width: 900px) {
+  .editor {
+    grid-template-columns: 1fr;
+  }
+
+  .sideSettings {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .toolbarActions .draftBtn {
+    display: none;
+  }
+}
+
+/* EditPost uses these via shared Write.module.css */
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.backBtn:hover {
+  color: var(--text-primary);
+}
+
+.loadingSpinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

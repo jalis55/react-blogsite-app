@@ -1,135 +1,84 @@
+import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import styles from "./Home.module.css";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight, Zap, Search } from "lucide-react";
 
-const CATEGORIES = ["Technology", "Design", "Culture", "Science", "Travel", "Health", "Business"];
+const CATEGORIES = ["All", "Technology", "Design", "Culture", "Science", "Travel", "Health", "Business"];
 
 export default function Home() {
   const posts = useQuery(api.posts.getPublishedPosts);
+  const [activeCategory, setActiveCategory] = useState("All");
 
   if (!posts) {
     return (
       <div className={styles.loading}>
         <div className={styles.loadingSpinner} />
-        <p>Loading posts...</p>
       </div>
     );
   }
 
-  const featuredPost = posts[0];
-  const gridPosts = posts.slice(1, 7);
-  const recentPosts = posts.slice(7, 13);
+  const filteredPosts = activeCategory === "All" 
+    ? posts 
+    : posts.filter(p => p.category === activeCategory);
 
   return (
-    <div className={styles.page}>
-      {/* Hero */}
+    <div className={styles.home}>
+      {/* High-Impact Hero */}
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroContent}>
-            <div className={styles.heroBadge}>
-              <Zap size={12} />
-              Real-time powered by Convex
-            </div>
+            <div className={styles.heroBadge}>Over 500+ Published Stories</div>
             <h1 className={styles.heroTitle}>
-              Ideas worth
-              <br />
-              <em>reading about.</em>
+              Where curiosity meets <br />
+              <span className={styles.gradientText}>original perspectives.</span>
             </h1>
             <p className={styles.heroSub}>
-              Discover thoughtful writing from curious minds. Stories, insights,
-              and perspectives that expand your world.
+              Discover articles on technology, design, science, and the human experience. 
+              Write your own story and join a global community of thinkers.
             </p>
             <div className={styles.heroActions}>
-              <Link to="/write" className={styles.heroCta}>
-                Start Writing
-                <ArrowRight size={16} />
-              </Link>
-              <a href="#latest" className={styles.heroSecondary}>
-                Browse Posts
-              </a>
+              <Link to="/write" className={styles.primaryBtn}>Start Writing</Link>
+              <a href="#latest" className={styles.secondaryBtn}>Browse Stories</a>
             </div>
           </div>
         </div>
-        <div className={styles.heroBg} aria-hidden="true" />
       </section>
 
-      {/* Categories */}
-      <section className={styles.categories}>
+      {/* Category Filter Section */}
+      <section id="latest" className={styles.feed}>
         <div className="container">
-          <div className={styles.categoryList}>
-            {CATEGORIES.map((cat) => (
-              <Link key={cat} to={`/category/${cat}`} className={styles.categoryChip}>
-                {cat}
-              </Link>
-            ))}
+          <div className={styles.feedHeader}>
+            <h2 className={styles.sectionTitle}>Latest Stories</h2>
+            <div className={styles.categories}>
+              {CATEGORIES.map((cat) => (
+                <button 
+                  key={cat} 
+                  className={activeCategory === cat ? styles.catActive : styles.catBtn}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
+
+          {filteredPosts.length > 0 ? (
+            <div className={styles.grid}>
+              {filteredPosts.map((post) => (
+                <PostCard key={post._id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div className={styles.empty}>
+              <h3>No posts found in this category</h3>
+              <p>Try exploring other categories or check back later.</p>
+            </div>
+          )}
         </div>
       </section>
-
-      {/* Featured Post */}
-      {featuredPost && (
-        <section className={styles.featured}>
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Featured</h2>
-              <div className={styles.sectionLine} />
-            </div>
-            <div className={styles.featuredGrid}>
-              <PostCard post={featuredPost} featured />
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Grid Posts */}
-      {gridPosts.length > 0 && (
-        <section id="latest" className={styles.grid}>
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Latest Stories</h2>
-              <div className={styles.sectionLine} />
-            </div>
-            <div className={styles.postsGrid}>
-              {gridPosts.map((post) => (
-                <PostCard key={post._id} post={post} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* More Posts */}
-      {recentPosts.length > 0 && (
-        <section className={styles.more}>
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>More to Read</h2>
-              <div className={styles.sectionLine} />
-            </div>
-            <div className={styles.postsGrid}>
-              {recentPosts.map((post) => (
-                <PostCard key={post._id} post={post} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Empty State */}
-      {posts.length === 0 && (
-        <div className={styles.emptyState}>
-          <div className={styles.emptyIcon}>✦</div>
-          <h2>No Posts Yet</h2>
-          <p>Be the first to share your ideas with the world.</p>
-          <Link to="/write" className={styles.heroCta}>
-            Write the first post
-            <ArrowRight size={16} />
-          </Link>
-        </div>
-      )}
     </div>
   );
 }
