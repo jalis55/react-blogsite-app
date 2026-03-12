@@ -20,14 +20,14 @@ export default function Home() {
     );
   }
 
-  const filteredPosts = activeCategory === "All" 
-    ? posts 
+  const filteredPosts = activeCategory === "All"
+    ? posts
     : posts.filter(p => p.category === activeCategory);
 
   return (
     <div className={styles.home}>
       {/* High-Impact Hero */}
-      <section className={styles.hero}>
+      {/* <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroContent}>
             <div className={styles.heroBadge}>Over 500+ Published Stories</div>
@@ -45,7 +45,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Category Filter Section */}
       <section id="latest" className={styles.feed}>
@@ -54,8 +54,8 @@ export default function Home() {
             <h2 className={styles.sectionTitle}>Latest Stories</h2>
             <div className={styles.categories}>
               {CATEGORIES.map((cat) => (
-                <button 
-                  key={cat} 
+                <button
+                  key={cat}
                   className={activeCategory === cat ? styles.catActive : styles.catBtn}
                   onClick={() => setActiveCategory(cat)}
                 >
